@@ -123,69 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &129548861
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 129548862}
-  - component: {fileID: 129548864}
-  - component: {fileID: 129548863}
-  m_Layer: 5
-  m_Name: Grid (Medium)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &129548862
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 129548861}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.009579177, y: 0.009579177, z: 0.009579177}
-  m_Children: []
-  m_Father: {fileID: 892223118}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &129548863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 129548861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c1e250546b9cf642af96d8fbdc6a7ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  columns: 9
-  rows: 9
-  square_offset: 2.5
-  grid_square: {fileID: 8881106955547968225, guid: c976cca64498e3a419f1db3a626f083f, type: 3}
-  start_position: {x: -435, y: 442}
-  square_scale: 0.9
---- !u!222 &129548864
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 129548861}
-  m_CullTransparentMesh: 1
 --- !u!1 &162443835
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,7 +295,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &204743121
 RectTransform:
   m_ObjectHideFlags: 0
@@ -476,6 +413,7 @@ RectTransform:
   - {fileID: 985937774}
   - {fileID: 773664820}
   - {fileID: 892223118}
+  - {fileID: 917968513}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -858,7 +796,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 129548861}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -1066,9 +1004,6 @@ Transform:
   m_LocalScale: {x: 104.393105, y: 104.393105, z: 104.393105}
   m_Children:
   - {fileID: 204743121}
-  - {fileID: 917968513}
-  - {fileID: 129548862}
-  - {fileID: 1940730896}
   m_Father: {fileID: 387828988}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1084,12 +1019,12 @@ GameObject:
   - component: {fileID: 917968515}
   - component: {fileID: 917968514}
   m_Layer: 5
-  m_Name: Grid(Easy)
+  m_Name: SudokuGrid[Do not duplicate]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &917968513
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1099,10 +1034,10 @@ RectTransform:
   m_GameObject: {fileID: 917968512}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.009579177, y: 0.009579177, z: 0.009579177}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 892223118}
-  m_RootOrder: 1
+  m_Father: {fileID: 387828988}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1150,7 +1085,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &985937774
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1424,7 +1359,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1.69, y: 207.25996}
-  m_SizeDelta: {x: 1854.19, y: 320.39}
+  m_SizeDelta: {x: 1048.98, y: 320.39}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1280329448
 MonoBehaviour:
@@ -1965,7 +1900,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1940730895}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -2026,69 +1961,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1902692123}
-  m_CullTransparentMesh: 1
---- !u!1 &1940730895
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1940730896}
-  - component: {fileID: 1940730898}
-  - component: {fileID: 1940730897}
-  m_Layer: 5
-  m_Name: Grid (Hard)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1940730896
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940730895}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.009579177, y: 0.009579177, z: 0.009579177}
-  m_Children: []
-  m_Father: {fileID: 892223118}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1940730897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940730895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c1e250546b9cf642af96d8fbdc6a7ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  columns: 9
-  rows: 9
-  square_offset: 2.5
-  grid_square: {fileID: 8881106955547968225, guid: c976cca64498e3a419f1db3a626f083f, type: 3}
-  start_position: {x: -435, y: 442}
-  square_scale: 0.9
---- !u!222 &1940730898
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940730895}
   m_CullTransparentMesh: 1
 --- !u!1 &2001177856
 GameObject:

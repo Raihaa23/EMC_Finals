@@ -18,7 +18,7 @@ public class SudokuGrid : MonoBehaviour
         if (grid_square.GetComponent<GridSquare>() == null)
             Debug.LogError("No GridSquare script attached!");
         CreateGrid();
-        SetGridNumber("Easy");
+        SetGridNumber(GameSettings.Instance.GetGameMode());
     }
 
     private void CreateGrid()
