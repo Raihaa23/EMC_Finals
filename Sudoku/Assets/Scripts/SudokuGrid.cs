@@ -12,17 +12,13 @@ public class SudokuGrid : MonoBehaviour
     [SerializeField] private float square_scale = 1.0f;
 
     private List<GameObject> grid_squares_ = new List<GameObject>();
+    private int select_grid_data = -1;
     void Start()
     {
         if (grid_square.GetComponent<GridSquare>() == null)
             Debug.LogError("No GridSquare script attached!");
         CreateGrid();
-        SetGridNumber();
-    }
-
-    void Update()
-    {
-
+        SetGridNumber("Easy");
     }
 
     private void CreateGrid()
@@ -70,11 +66,23 @@ public class SudokuGrid : MonoBehaviour
             column_number++;
         }
     }
-    private void SetGridNumber()
+    private void SetGridNumber(string level)
     {
-        foreach (var square in grid_squares_)
+        select_grid_data = Random.Range(0, SudokuData.Instance.sudoku_game[level].Count);
+        var data = SudokuData.Instance.sudoku_game[level][select_grid_data];
+
+        SetGridSquareData(data);
+        //foreach (var square in grid_squares_)
+        //{
+        //    square.GetComponent<GridSquare>().SetNumber(Random.Range(0, 10));
+        //}
+    }
+
+    private void SetGridSquareData(SudokuData.SudokuBoardData data)
+    {
+        for (int index = 0; index < grid_squares_.Count; index++)
         {
-            square.GetComponent<GridSquare>().SetNumber(Random.Range(0, 10));
+            grid_squares_[index].GetComponent<GridSquare>().SetNumber(data.unsolved_data[index]);
         }
     }
 

@@ -10,16 +10,6 @@ public class GridSquare : Selectable
     
     private int number_ = 0;
 
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
-
     public void DisplayText()
     {
         if (number_ <= 0)
