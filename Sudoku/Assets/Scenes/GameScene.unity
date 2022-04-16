@@ -1422,7 +1422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -348.39993}
+  m_AnchoredPosition: {x: 0, y: -348.39996}
   m_SizeDelta: {x: 1044, y: 300.32996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &271331289
@@ -3063,7 +3063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -227.43, y: -810}
+  m_AnchoredPosition: {x: -227.43, y: -809.99994}
   m_SizeDelta: {x: 370.5, y: -1715.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &680857908
@@ -3263,6 +3263,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738708326}
   m_CullTransparentMesh: 1
+--- !u!1 &766055480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 766055482}
+  - component: {fileID: 766055481}
+  m_Layer: 0
+  m_Name: '[LineIndicator]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &766055481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766055480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac23173460cfe48409c743f38f0913d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &766055482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766055480}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.15889, y: -0.59808266, z: 1378.7307}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &773664819
 GameObject:
   m_ObjectHideFlags: 0
@@ -3389,6 +3432,7 @@ MonoBehaviour:
   start_position: {x: -435, y: 442}
   square_scale: 0.9
   square_gap: 5
+  line_highlight_color: {r: 0.8, g: 0.8862745, b: 0.9372549, a: 1}
 --- !u!222 &917968515
 CanvasRenderer:
   m_ObjectHideFlags: 0
