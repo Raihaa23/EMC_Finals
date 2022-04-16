@@ -38,4 +38,9 @@ public class MenuButton : MonoBehaviour
     {
         obj.SetActive(false);
     }
+
+    public void SetPause(bool paused)
+    {
+        GameSettings.Instance.SetPaused(paused);
+    }
 }

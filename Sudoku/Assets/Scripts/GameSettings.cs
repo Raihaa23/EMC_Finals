@@ -18,6 +18,7 @@ public class GameSettings : MonoBehaviour
 
     void Awake()
     {
+        _Paused = false;
         if (Instance == null)
         {
             DontDestroyOnLoad(this);
@@ -30,6 +31,10 @@ public class GameSettings : MonoBehaviour
     #endregion
 
     private EGameMode _GameMode;
+    private bool _Paused = false;
+
+    public void SetPaused(bool paused) { _Paused = paused;}
+    public bool GetPaused() { return _Paused;}
 
     void Start()
     {
