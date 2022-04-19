@@ -11,7 +11,7 @@ public class SudokuGrid : MonoBehaviour
     [SerializeField] private Vector2 start_position = new Vector2(0.0f, 0.0f);
     [SerializeField] private float square_scale = 1.0f;
     public float square_gap = 0.1f;
-    public Color line_highlight_color = Color.red;
+    public Color line_highlight_color;
     private List<GameObject> grid_squares_ = new List<GameObject>();
     private int select_grid_data = -1;
     void Start()

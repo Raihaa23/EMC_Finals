@@ -25,11 +25,6 @@ public class menuButton : MonoBehaviour
         GameSettings.Instance.SetGameMode(GameSettings.EGameMode.HARD);
         SceneManager.LoadScene(name);
     }
-    public void LoadVeryHardGame(string name)
-    {
-        GameSettings.Instance.SetGameMode(GameSettings.EGameMode.VERY_HARD);
-        SceneManager.LoadScene(name);
-    }
     public void ActivateObject(GameObject obj)
     {
         obj.SetActive(true);
