@@ -5,11 +5,11 @@ using TMPro;
 
 public class GameOverMenu : MonoBehaviour
 {
-    public TMP_Text textClock;
-
-    void Start()
-    {
-        textClock.text = Clock.instance.GetCurrentTimeText().text;
-    }
+    // public TMP_Text textClock;
+    //
+    // void Start()
+    // {
+    //     textClock.text = Clock.instance.GetCurrentTimeText().text;
+    // }
 
 }

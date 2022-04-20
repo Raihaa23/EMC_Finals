@@ -48,20 +48,20 @@ public class Clock : MonoBehaviour
         return n.ToString().PadLeft(2, '0');
     }
 
-    public void OnGameOver()
-    {
-        stop_clock_ = true;
-    }
+    // public void OnGameOver()
+    // {
+    //     stop_clock_ = true;
+    // }
 
-    private void OnEnable()
-    {
-        GameEvents.OnGameOver += OnGameOver;
-    }
-
-    private void OnDisable()
-    {
-        GameEvents.OnGameOver -= OnGameOver;
-    }
+    // private void OnEnable()
+    // {
+    //     GameEvents.OnGameOver += OnGameOver;
+    // }
+    //
+    // private void OnDisable()
+    // {
+    //     GameEvents.OnGameOver -= OnGameOver;
+    // }
 
     public TMP_Text GetCurrentTimeText()
     {

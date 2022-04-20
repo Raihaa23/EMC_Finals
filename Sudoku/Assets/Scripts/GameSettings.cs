@@ -45,14 +45,14 @@ public class GameSettings : MonoBehaviour
         _GameMode = mode; 
     }
 
-    public void SetGameMode(string mode)
-    {
-        if (mode == "Easy") SetGameMode(EGameMode.EASY);
-        else if (mode == "Medium") SetGameMode(EGameMode.MEDIUM);
-        else if (mode == "Hard") SetGameMode(EGameMode.HARD);
-        
-        else SetGameMode(EGameMode.NOT_SET);
-    }
+    // public void SetGameMode(string mode)
+    // {
+    //     if (mode == "Easy") SetGameMode(EGameMode.EASY);
+    //     else if (mode == "Medium") SetGameMode(EGameMode.MEDIUM);
+    //     else if (mode == "Hard") SetGameMode(EGameMode.HARD);
+    //     
+    //     else SetGameMode(EGameMode.NOT_SET);
+    // }
 
     public string GetGameMode()
     {

@@ -83,7 +83,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
                 colors.normalColor = Color.red;
                 this.colors = colors;
 
-                GameEvents.OnWrongNumberMethod();
+                // GameEvents.OnWrongNumberMethod();
             }
             else
             {
