@@ -38,4 +38,9 @@ public class menuButton : MonoBehaviour
     {
         GameSettings.Instance.SetPaused(paused);
     }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
