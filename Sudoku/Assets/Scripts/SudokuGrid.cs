@@ -14,6 +14,7 @@ public class SudokuGrid : MonoBehaviour
     public Color line_highlight_color;
     private List<GameObject> grid_squares_ = new List<GameObject>();
     private int select_grid_data = -1;
+    
     void Start()
     {
         if (grid_square.GetComponent<GridSquare>() == null)

@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class menuButton : MonoBehaviour
 {
-   public void LoadScene(string name)
-    {
-        SceneManager.LoadScene(name);
+    public void LoadScene(string name)
+   {
+       SceneManager.LoadScene(name);
     }
 
     public void LoadEasyGame(string name)
