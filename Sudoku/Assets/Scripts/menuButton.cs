@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class menuButton : MonoBehaviour
 {
-   public void LoadScene(string name)
+    public void LoadScene(string name)
     {
+        ResetCounter.instance.resetCounted = 0;
         SceneManager.LoadScene(name);
     }
 
