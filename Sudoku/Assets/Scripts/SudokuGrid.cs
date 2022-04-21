@@ -14,12 +14,16 @@ public class SudokuGrid : MonoBehaviour
     public Color line_highlight_color;
     private List<GameObject> grid_squares_ = new List<GameObject>();
     private int select_grid_data = -1;
+
+    public static int currentStage = -1;
+    public static int resetCounter = 0;
     void Start()
     {
         if (grid_square.GetComponent<GridSquare>() == null)
             Debug.LogError("No GridSquare script attached!");
         CreateGrid();
         SetGridNumber(GameSettings.Instance.GetGameMode());
+        resetCounter = 1;
     }
 
     private void CreateGrid()
@@ -88,8 +92,12 @@ public class SudokuGrid : MonoBehaviour
     }
     private void SetGridNumber(string level)
     {
-        select_grid_data = Random.Range(0, SudokuData.Instance.sudoku_game[level].Count);
-        var data = SudokuData.Instance.sudoku_game[level][select_grid_data];
+        if (resetCounter == 0)
+        {
+            select_grid_data = Random.Range(0, SudokuData.Instance.sudoku_game[level].Count);
+            currentStage = select_grid_data;
+        }
+        var data = SudokuData.Instance.sudoku_game[level][currentStage];
 
         SetGridSquareData(data);
         //foreach (var square in grid_squares_)
