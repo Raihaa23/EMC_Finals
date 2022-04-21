@@ -10,6 +10,7 @@ public class menuButton : MonoBehaviour
     {
         ResetCounter.instance.resetCounted = 0;
         SceneManager.LoadScene(name);
+
     }
 
     public void LoadEasyGame(string name)

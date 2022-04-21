@@ -13,8 +13,8 @@ public class SudokuGrid : MonoBehaviour
     public float square_gap = 0.1f;
     public Color line_highlight_color;
     private List<GameObject> grid_squares_ = new List<GameObject>();
+    
     private int select_grid_data = -1;
-
     private static int currentStage = -1;
     void Start()
     {
