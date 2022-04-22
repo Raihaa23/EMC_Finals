@@ -25,7 +25,7 @@ public class ScoreManager : MonoBehaviour
     #endregion
 
     private float _ongoingScore;
-    private float _finalScore;
+    private  float _finalScore;
     
     [SerializeField] private float addScore = 10;
     [SerializeField] private float subtractScore = 5;
@@ -35,6 +35,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private float hardMultiplier = 2.5f;
 
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI finalScoreText;
 
     private void Update()
     {
@@ -71,8 +72,8 @@ public class ScoreManager : MonoBehaviour
     }
 
     public void ConvertToFinalScore()
-    { 
-        
+    {
         _finalScore = _ongoingScore;
+        finalScoreText.text = _finalScore.ToString();
     }
 }

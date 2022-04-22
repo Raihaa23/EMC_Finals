@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class VictoryManager : MonoBehaviour
@@ -47,6 +48,7 @@ public class VictoryManager : MonoBehaviour
         if (correctCount == currentChecker)
         {
             GameEvents.OnVictoryMethod();
+            ScoreManager.Instance.ConvertToFinalScore();
             victoryPopUp.SetActive(true);
         }
     }
