@@ -69,4 +69,10 @@ public class ScoreManager : MonoBehaviour
         }
         
     }
+
+    public void ConvertToFinalScore()
+    { 
+        
+        _finalScore = _ongoingScore;
+    }
 }

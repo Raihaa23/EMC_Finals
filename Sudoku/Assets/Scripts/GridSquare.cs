@@ -84,6 +84,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
                 this.colors = colors;
                 ScoreManager.Instance.reduceScore();
                 // GameEvents.OnWrongNumberMethod();
+                
             }
             else
             {
@@ -93,6 +94,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
                 colors.normalColor = Color.white;
                 this.colors = colors;
                 ScoreManager.Instance.AddScore();
+                GameEvents.OnCorrectMethod();
             }
         }
 

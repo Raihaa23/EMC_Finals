@@ -21,6 +21,30 @@ public class GameEvents : MonoBehaviour
         if (OnSquareSelected != null)
             OnSquareSelected(square_index);
     }
+    
+    public delegate void CorrectNumber();
+    public static event CorrectNumber OnCorrectNumber;
+
+    public static void OnCorrectMethod()
+    {
+        if (OnCorrectNumber != null)
+        {
+            OnCorrectNumber();
+        }
+    }
+
+    public delegate void Victory();
+    public static event Victory OnVictory;
+
+    public static void OnVictoryMethod()
+    {
+        if (OnVictory != null)
+        {
+            OnVictory();
+        }
+    }
+    
+
 
     // public delegate void WrongNumber();
     // public static event WrongNumber OnWrongNumber;
@@ -30,7 +54,7 @@ public class GameEvents : MonoBehaviour
     //     if (OnWrongNumber != null)
     //         OnWrongNumber();
     // }
-
+    //
     // public delegate void GameOver();
     // public static event GameOver OnGameOver;
     //

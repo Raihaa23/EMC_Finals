@@ -38,13 +38,13 @@ public class Lives : MonoBehaviour
     // //     }
     // // }
     //
-    // private void OnEnable()
-    // {
-    //     // GameEvents.OnWrongNumber += WrongNumber;
-    // }
-    //
-    // private void OnDisable()
-    // {
-    //     // GameEvents.OnWrongNumber -= WrongNumber;
-    // }
+    // // private void OnEnable()
+    // // {
+    // //     GameEvents.OnWrongNumber += WrongNumber;
+    // // }
+    // //
+    // // private void OnDisable()
+    // // {
+    // //     GameEvents.OnWrongNumber -= WrongNumber;
+    // // }
 }
