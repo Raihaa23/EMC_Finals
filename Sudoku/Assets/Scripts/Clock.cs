@@ -8,6 +8,7 @@ public class Clock : MonoBehaviour
 {
     private float delta_time;
     private TMP_Text textClock;
+    public TextMeshProUGUI FinishTime;
     private bool stop_clock_ = false;
 
     public static Clock instance;
@@ -40,6 +41,7 @@ public class Clock : MonoBehaviour
             string seconds = LeadingZero(span.Seconds);
 
             textClock.text = hour + ":" + minute + ":" + seconds;
+            FinishTime.text = textClock.text;
         }
     }
 
