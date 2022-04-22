@@ -82,7 +82,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
                 var colors = this.colors;
                 colors.normalColor = Color.red;
                 this.colors = colors;
-
+                ScoreManager.Instance.reduceScore();
                 // GameEvents.OnWrongNumberMethod();
             }
             else
@@ -92,6 +92,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
                 var colors = this.colors;
                 colors.normalColor = Color.white;
                 this.colors = colors;
+                ScoreManager.Instance.AddScore();
             }
         }
 

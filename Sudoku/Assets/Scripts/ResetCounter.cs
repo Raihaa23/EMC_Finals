@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class ResetCounter : MonoBehaviour
 {
-    public static ResetCounter instance;
-
-    public int resetCounted;
-
+    #region singleton
+    public static ResetCounter Instance;
+    
     private void Awake()
     {
-        if (instance == null) 
+        if (Instance == null) 
         {
             DontDestroyOnLoad(gameObject);
-            instance = this;
+            Instance = this;
         }
-        else if (instance !=this)
+        else if (Instance !=this)
         {
             Destroy(gameObject);
         }
     }
+    
+
+    #endregion
+    public int resetCounted;
 }

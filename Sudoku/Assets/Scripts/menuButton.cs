@@ -8,7 +8,7 @@ public class menuButton : MonoBehaviour
 {
     public void LoadScene(string name)
     {
-        ResetCounter.instance.resetCounted = 0;
+        ResetCounter.Instance.resetCounted = 0;
         SceneManager.LoadScene(name);
 
     }

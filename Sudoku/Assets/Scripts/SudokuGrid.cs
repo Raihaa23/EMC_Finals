@@ -22,7 +22,7 @@ public class SudokuGrid : MonoBehaviour
             Debug.LogError("No GridSquare script attached!");
         CreateGrid();
         SetGridNumber(GameSettings.Instance.GetGameMode());
-        ResetCounter.instance.resetCounted = 1;
+        ResetCounter.Instance.resetCounted = 1;
     }
 
     private void CreateGrid()
@@ -91,7 +91,7 @@ public class SudokuGrid : MonoBehaviour
     }
     private void SetGridNumber(string level)
     {
-        if (ResetCounter.instance.resetCounted == 0)
+        if (ResetCounter.Instance.resetCounted == 0)
         {
             select_grid_data = Random.Range(0, SudokuData.Instance.sudoku_game[level].Count);
             currentStage = select_grid_data;
