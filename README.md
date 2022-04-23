@@ -13,4 +13,11 @@ Needless:
 Modified:
     Start Button
     Main menu
+    
+[Vincent Rafael G. Alfaro]
+    - Fixed Difficulty Variations(Easy = 30 blank slots, Medium = 45 blank slots, Hard = 65 blank slots)
+    - Added 2 more randomized stages for Easy, Medium, and Hard difficulty
+    - Added a Scoring System that has a multiplier depending on the difficulty selected
+    - Added a Victory pop-up event
+    - Cleaned up unused scripts and game objects, deleted needless lines, organized scripts into different directories.
 
