@@ -21,3 +21,8 @@ Modified:
     - Added a Victory pop-up event
     - Cleaned up unused scripts and game objects, deleted needless lines, organized scripts into different directories.
 
+[Ryan T. Cedullo]
+    - Added branches for modifying tha main branch.
+    - Added/Modified Restart functions and added Restart assets in Unity.
+    - Added Victory U.I Asset in Unity.
+    
