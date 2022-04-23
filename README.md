@@ -25,4 +25,8 @@ Modified:
     - Added branches for modifying tha main branch.
     - Added/Modified Restart functions and added Restart assets in Unity.
     - Added Victory U.I Asset in Unity.
+
+[Kyle Francis Reyes]
+    - Added/Modified Main Menu and In-game UI Design.
+    - Modified Victory UI.
     
