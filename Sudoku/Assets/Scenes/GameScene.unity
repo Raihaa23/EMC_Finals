@@ -1324,6 +1324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a20642cac961694ab58d7120e25ca73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  continueButton: {fileID: 0}
 --- !u!1001 &389021433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2423,12 +2424,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   columns: 9
   rows: 9
-  square_offset: 2.5
-  grid_square: {fileID: 8881106955547968225, guid: c976cca64498e3a419f1db3a626f083f, type: 3}
-  start_position: {x: -435, y: 442}
-  square_scale: 0.9
-  square_gap: 5
-  line_highlight_color: {r: 0.21064433, g: 0.65344155, b: 0.9150943, a: 1}
+  squareOffset: 2.5
+  gridSquarePrefab: {fileID: 8881106955547968225, guid: c976cca64498e3a419f1db3a626f083f, type: 3}
+  gridSquareScale: 0.9
+  startPosition: {x: -435, y: 442}
+  squareGap: 5
+  lineHighlightColor: {r: 1, g: 0, b: 0.78564453, a: 1}
 --- !u!222 &917968515
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2580,6 +2581,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
         m_MethodName: SetPause
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1560695879}
+        m_TargetAssemblyTypeName: Managers.SaveManager, Assembly-CSharp
+        m_MethodName: Clear
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3917,6 +3930,49 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1560695878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1560695880}
+  - component: {fileID: 1560695879}
+  m_Layer: 0
+  m_Name: '[SaveManager]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1560695879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560695878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1de953f5df3740bcb6d894cf891eac01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1560695880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560695878}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.75436026, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1561824875
 GameObject:

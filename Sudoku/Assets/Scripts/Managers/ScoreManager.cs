@@ -1,3 +1,4 @@
+using System;
 using GridManagement;
 using TMPro;
 using UnityEngine;
@@ -26,6 +27,7 @@ namespace Managers
 
         private float _ongoingScore;
         private float _finalScore;
+        private SaveManager _saveManager;
     
         [SerializeField] private float addScore = 10;
         [SerializeField] private float subtractScore = 5;
@@ -37,28 +39,44 @@ namespace Managers
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private TextMeshProUGUI finalScoreText;
 
+
+        private void Start()
+        {
+            _saveManager = SaveManager.Instance;
+            _ongoingScore = _saveManager.Data.CurrentScore;
+        }
+
         private void Update()
         {
             scoreText.text = _ongoingScore.ToString();
+        }
+
+        private void UpdateScoreInSave()
+        {
+            _saveManager.Data.UpdateCurrentScore(_ongoingScore);
+            _saveManager.Save();
+            
         }
 
         public void AddScore()
         {
             switch (GameSettings.Instance.GetGameMode())
             {
-                case "Easy":
+                case GameModeDifficulty.Easy:
                     _ongoingScore += addScore * easyMultiplier;
                     break;
-                case "Medium":
+                case GameModeDifficulty.Medium:
                     _ongoingScore += addScore * mediumMultiplier;
                     break;
-                case "Hard":
+                case GameModeDifficulty.Hard:
                     _ongoingScore += addScore * hardMultiplier;
                     break;
             }
+
+            UpdateScoreInSave();
         }
 
-        public void reduceScore()
+        public void ReduceScore()
         {
             if (_ongoingScore > 0)
             {
@@ -68,7 +86,8 @@ namespace Managers
             {
                 _ongoingScore = 0;
             }
-        
+            UpdateScoreInSave();
+
         }
 
         public void ConvertToFinalScore()

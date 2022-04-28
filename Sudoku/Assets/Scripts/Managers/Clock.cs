@@ -8,10 +8,10 @@ namespace Managers
 {
     public class Clock : MonoBehaviour
     {
-        private float delta_time;
+        private float _deltaTime;
         private TMP_Text textClock;
         public TextMeshProUGUI FinishTime;
-        private bool stop_clock_ = false;
+        private bool _stopClock = false;
 
         public static Clock instance;
 
@@ -23,20 +23,32 @@ namespace Managers
             instance = this;
 
             textClock = GetComponentInChildren<TMP_Text>();
-            delta_time = 0;
+            _deltaTime = 0;
         }
 
         void Start()
         {
-            stop_clock_ = false; 
+            _stopClock = false; 
         }
 
         void Update()
         {
-            if(GameSettings.Instance.GetPaused() == false && stop_clock_ == false)
+            var saveData = SaveManager.Instance.Data;
+        
+            
+            if(GameSettings.Instance.GetPaused() == false && _stopClock == false)
             {
-                delta_time += Time.deltaTime;
-                TimeSpan span = TimeSpan.FromSeconds(delta_time);
+                if (saveData != null)
+                {
+                    /*
+                 * Compute for the saved elapsed time 
+                 */
+                    _deltaTime = saveData.TotalElapsedTimeInSeconds;
+                }
+                
+                _deltaTime += Time.deltaTime;
+                
+                TimeSpan span = TimeSpan.FromSeconds(_deltaTime);
 
                 string hour = LeadingZero(span.Hours);
                 string minute = LeadingZero(span.Minutes);
@@ -44,6 +56,9 @@ namespace Managers
 
                 textClock.text = hour + ":" + minute + ":" + seconds;
                 FinishTime.text = textClock.text;
+                
+                saveData.UpdateTotalElapsedTime(_deltaTime);
+                SaveManager.Instance.Save();
             }
         }
 
@@ -54,7 +69,7 @@ namespace Managers
 
         public void OnGameOver()
         {
-            stop_clock_ = true;
+            _stopClock = true;
         }
 
         private void OnEnable()

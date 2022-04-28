@@ -6,7 +6,10 @@ namespace GridManagement
     {
         public static LineIndicator instance;
 
-        private int[,] line_data = new int[9, 9]
+        private const int columnCount = 9;
+        private const int rowCount = 9;
+        
+        private int[,] line_data = new int[rowCount, columnCount]
         {
             { 0, 1, 2,   3, 4, 5,    6, 7, 8 },
             { 9,10,11,  12,13,14,   15,16,17 },
@@ -36,7 +39,7 @@ namespace GridManagement
             72,73,74, 75,76,77,   78,79,80
         };
 
-        private int[,] square_data = new int[9, 9]
+        private int[,] square_data = new int[rowCount, columnCount]
         {
             {0,1,2,9,10,11,18,19,20 },
             {3,4,5,12,13,14,21,22,23},
@@ -62,9 +65,9 @@ namespace GridManagement
             int pos_row = -1;
             int pos_col = -1;
 
-            for (int row = 0; row < 9; row++)
+            for (int row = 0; row < rowCount; row++)
             {
-                for (int col = 0; col < 9; col++)
+                for (int col = 0; col < columnCount; col++)
                 {
                     if(line_data[row, col] == square_index)
                     {
@@ -82,6 +85,7 @@ namespace GridManagement
             int[] line = new int[9];
 
             var square_position_row = GetSquarePosition(square_index).Item1;
+            /*Debug.Log($"SquarePositionRow: {square_position_row}");*/
 
             for (int index = 0; index < 9; index++)
             {
@@ -96,7 +100,7 @@ namespace GridManagement
             int[] line = new int[9];
 
             var square_position_col = GetSquarePosition(square_index).Item2;
-
+                /*Debug.Log($"SquarePositionCol: {square_position_col}");*/
             for (int index = 0; index  < 9 ; index ++)
             {
                 line[index] = line_data[index, square_position_col];
@@ -110,9 +114,9 @@ namespace GridManagement
             int[] line = new int[9];
             int pos_row = -1;
 
-            for (int row = 0; row  < 9; row ++)
+            for (int row = 0; row  < rowCount; row ++)
             {
-                for (int col = 0; col < 9; col++)
+                for (int col = 0; col < columnCount; col++)
                 {
                     if(square_data[row, col] == square_index)
                     {
@@ -122,6 +126,11 @@ namespace GridManagement
             }
             for (int index = 0; index < 9; index++)
             {
+
+                if (pos_row == -1)
+                {
+                    break;
+                }
                 line[index] = square_data[pos_row, index];
             }
 
