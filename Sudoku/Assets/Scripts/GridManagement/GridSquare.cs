@@ -32,6 +32,7 @@ namespace GridManagement
         public void SetCorrectNumber(int index)
         {
             correct_number_ = index;
+            
             has_wrong_value_ = false;
         }
 
@@ -53,6 +54,7 @@ namespace GridManagement
         {
             selected_ = true;
             GameEvents.SquareSelecedMethod(square_index_);
+            
         }
 
         public void OnSubmit(BaseEventData eventData)
@@ -64,12 +66,14 @@ namespace GridManagement
         {
             GameEvents.OnUpdateSquareNumber += OnSetNumber;
             GameEvents.OnSquareSelected += OnSquareSelected;
+            GameEvents.OnGetHint += GetHint;
         }
 
         private void OnDisable()
         {
             GameEvents.OnUpdateSquareNumber -= OnSetNumber;
             GameEvents.OnSquareSelected -= OnSquareSelected;
+            GameEvents.OnGetHint -= GetHint;
         }
 
         public void OnSetNumber(int number)
@@ -96,8 +100,21 @@ namespace GridManagement
                     GameEvents.OnCorrectMethod();
                 }
             }
+        }
 
-
+        public void GetHint()
+        {
+            if (selected_ && has_default_value_ == false)
+            {
+                SetNumber(correct_number_);
+                has_wrong_value_ = false;
+                has_default_value_ = true;
+                var colors = this.colors;
+                colors.normalColor = Color.white;
+                this.colors = colors;
+                GameEvents.OnCorrectMethod();
+                GameEvents.OnReduceHintMethod();
+            }
         }
 
         public void OnSquareSelected(int square_index)
