@@ -3763,6 +3763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30ff830d7f44824f978b873ce972352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fileName: SudokuSaveFile.json
 --- !u!4 &1405624639
 Transform:
   m_ObjectHideFlags: 0

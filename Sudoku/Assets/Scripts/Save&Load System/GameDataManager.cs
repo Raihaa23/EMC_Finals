@@ -6,8 +6,12 @@ using System.Linq;
 public class GameDataManager : MonoBehaviour
 {
 
+    [Header ("File Storage Config")]
+    [SerializeField] private string fileName;
+
     private GameData gameData;
     private List<IGameData> gameDataObjects;
+    private FileDataHandler dataHandler;
 
     public static GameDataManager instance {get; private set;}
 
@@ -22,8 +26,9 @@ public class GameDataManager : MonoBehaviour
 
     private void Start()
     {
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.gameDataObjects = FindAllGameDataObjects();
-        LoadGame();
+        //LoadGame();
     }
 
     public void NewGame()
@@ -34,6 +39,7 @@ public class GameDataManager : MonoBehaviour
     public void LoadGame()
     {
         //Load saved data
+        this.gameData = dataHandler.Load();
         //No saved data, start new game
         if(this.gameData == null)
         {
@@ -46,8 +52,6 @@ public class GameDataManager : MonoBehaviour
             gameDataObj.LoadData(gameData);
         }
 
-        Debug.Log("Loaded Score =" + gameData.IngameScore);
-
     }
 
     public void SaveGame()
@@ -58,9 +62,8 @@ public class GameDataManager : MonoBehaviour
             gameDataObj.SaveData(ref gameData);
         }
 
-        Debug.Log("Saved Score ="+ gameData.IngameScore);
-
         // Save data to a file
+        dataHandler.Save(gameData);
     }
 
     private void OnApplicationQuit()
