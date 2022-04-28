@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Events;
 using Managers;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace GridManagement
 {
@@ -9,24 +12,42 @@ namespace GridManagement
     {
         [SerializeField] private int columns = 0;
         [SerializeField] private int rows = 0;
-        [SerializeField] private float square_offset = 0.0f;
-        [SerializeField] private GameObject grid_square;
-        [SerializeField] private Vector2 start_position = new Vector2(0.0f, 0.0f);
-        [SerializeField] private float square_scale = 1.0f;
-        public float square_gap = 0.1f;
-        public Color line_highlight_color;
-        private List<GameObject> grid_squares_ = new List<GameObject>();
-    
-        private int select_grid_data = -1;
-        private static int currentStage = -1;
+        [SerializeField] private float squareOffset = 0f;
+        [SerializeField] private GameObject gridSquarePrefab;
+        [SerializeField] private float gridSquareScale = 1.0f;
+        [SerializeField] private Vector2 startPosition = new Vector2(0.0f, 0.0f);
+        
+        public float squareGap = 0.1f;
+        public Color lineHighlightColor;
+        
+        private List<GameObject> _gridSquares = new List<GameObject>();
+        private GameModeDifficulty _gameMode = GameModeDifficulty.Unknown;
+        
+        private int _selectedGridLevelData = -1;
+        private static int _currentStage = -1;
+        private SaveManager _saveManager;
+        
         void Start()
         {
-            if (grid_square.GetComponent<GridSquare>() == null)
+            _saveManager = SaveManager.Instance;
+            
+            if (gridSquarePrefab.GetComponent<GridSquare>() == null)
                 Debug.LogError("No GridSquare script attached!");
             CreateGrid();
-            SetGridNumber(GameSettings.Instance.GetGameMode());
+            _gameMode = GameSettings.Instance.GetGameMode();
+
+            SetGridNumber(_gameMode);
+            
             ResetCounter.Instance.resetCounted = 1;
+            _saveManager.Data.TotalResetCount = ResetCounter.Instance.resetCounted;
+            _saveManager.Data.GameLevel = _selectedGridLevelData;
+            _saveManager.Data.GameModeDifficulty = _gameMode;
+            
+            _saveManager.Save();
+
         }
+
+   
 
         private void CreateGrid()
         {
@@ -36,34 +57,37 @@ namespace GridManagement
 
         private void SpawnGridSquares()
         {
-            int square_index = 0;
+            int squareIndex = 0;
             for (int row = 0; row < rows; row++)
             {
                 for (int column = 0; column < columns; column++)
                 {
-                    grid_squares_.Add(Instantiate(grid_square) as GameObject);
-                    grid_squares_[grid_squares_.Count - 1].GetComponent<GridSquare>().SetSquareIndex(square_index);
-                    grid_squares_[grid_squares_.Count - 1].transform.SetParent(this.transform); //Instantiating this game object as a child of the script holder
-                    grid_squares_[grid_squares_.Count - 1].transform.localScale = new Vector3(square_scale, square_scale, square_scale);
 
-                    square_index++;
+                    var spawnedGridSquarePrefab = Instantiate(gridSquarePrefab, this.transform, true);
+                    var gridSquare = spawnedGridSquarePrefab.GetComponent<GridSquare>();
+                    gridSquare.SetSquareIndex(squareIndex);
+                    spawnedGridSquarePrefab.transform.localScale = new Vector3(gridSquareScale, gridSquareScale, gridSquareScale);
+                    
+                    _gridSquares.Add(spawnedGridSquarePrefab);
+                    squareIndex++;
                 }
             }
+            
         }
 
         private void SetSquaresPosition()
         {
-            var square_rect = grid_squares_[0].GetComponent<RectTransform>();
+            var square_rect = _gridSquares[0].GetComponent<RectTransform>();
             Vector2 offset = new Vector2();
             Vector2 square_gap_number = new Vector2(0.0f, 0.0f);
             bool row_moved = false;
-            offset.x = square_rect.rect.width * square_rect.transform.localScale.x + square_offset;
-            offset.y = square_rect.rect.height * square_rect.transform.localScale.y + square_offset;
+            offset.x = square_rect.rect.width * square_rect.transform.localScale.x + squareOffset;
+            offset.y = square_rect.rect.height * square_rect.transform.localScale.y + squareOffset;
 
             int column_number = 0;
             int row_number = 0;
 
-            foreach (GameObject square in grid_squares_)
+            foreach (GameObject square in _gridSquares)
             {
                 if (column_number + 1 > columns)
                 {
@@ -73,84 +97,163 @@ namespace GridManagement
                     row_moved = false;
                 }
 
-                var pos_x_offset = offset.x * column_number + (square_gap_number.x * square_gap);
-                var pos_y_offset = offset.y * row_number + (square_gap_number.y * square_gap);
+                var pos_x_offset = offset.x * column_number + (square_gap_number.x * squareGap);
+                var pos_y_offset = offset.y * row_number + (square_gap_number.y * squareGap);
 
                 if(column_number > 0 && column_number % 3 == 0)
                 {
                     square_gap_number.x++;
-                    pos_x_offset += square_gap;
+                    pos_x_offset += squareGap;
                 }
                 if(row_number > 0 && row_number % 3 == 0 && row_moved == false)
                 {
                     row_moved = true;
                     square_gap_number.y++;
-                    pos_y_offset += square_gap;
+                    pos_y_offset += squareGap;
                 }
 
-                square.GetComponent<RectTransform>().anchoredPosition = new Vector2(start_position.x + pos_x_offset, start_position.y - pos_y_offset);
+                square.GetComponent<RectTransform>().anchoredPosition = new Vector2(startPosition.x + pos_x_offset, startPosition.y - pos_y_offset);
                 column_number++;
             }
         }
-        private void SetGridNumber(string level)
+        private void SetGridNumber(GameModeDifficulty difficulty)
         {
+            
             if (ResetCounter.Instance.resetCounted == 0)
             {
-                select_grid_data = Random.Range(0, SudokuData.Instance.sudoku_game[level].Count);
-                currentStage = select_grid_data;
-            }
-            var data = SudokuData.Instance.sudoku_game[level][currentStage];
 
-            SetGridSquareData(data);
-            //foreach (var square in grid_squares_)
-            //{
-            //    square.GetComponent<GridSquare>().SetNumber(Random.Range(0, 10));
-            //}
+                _selectedGridLevelData = 0;
+
+                if (_saveManager.HasSave())
+                {
+                    _selectedGridLevelData = _saveManager.Data.GameLevel;
+                }
+                else
+                {
+                    _selectedGridLevelData = Random.Range(0, SudokuData.Instance.SudokuGamesDict[difficulty].Count);
+                }
+
+                _currentStage = _selectedGridLevelData;
+                
+            }
+
+            var savedGridData = _saveManager.Data.CurrentGridData;
+            var data = SudokuData.Instance.SudokuGamesDict[difficulty][_currentStage];
+            
+            var unsolvedData = data.UnsolvedData;
+            
+            if (savedGridData.Count == unsolvedData.Length )
+            {
+                for (int i = 0; i < savedGridData.Count; i++)
+                {
+                    unsolvedData[i] = savedGridData[i];
+                }
+
+                data.UnsolvedData = unsolvedData;
+            }
+            
+
+            SetGridSquareData(
+                new SudokuBoardData()
+            {
+                SolvedData = data.SolvedData,
+                UnsolvedData =  unsolvedData,
+            });
+         
         }
 
-        private void SetGridSquareData(SudokuData.SudokuBoardData data)
+        private void SetGridSquareData(SudokuBoardData data)
         {
-            for (int index = 0; index < grid_squares_.Count; index++)
+            for (int index = 0; index < _gridSquares.Count; index++)
             {
-                grid_squares_[index].GetComponent<GridSquare>().SetNumber(data.unsolved_data[index]);
-                grid_squares_[index].GetComponent<GridSquare>().SetCorrectNumber(data.solve_data[index]);
-                grid_squares_[index].GetComponent<GridSquare>().SetHasDefaultValue(data.unsolved_data[index] != 0 && data.unsolved_data[index] == data.solve_data[index]);
+
+                var solvedData = data.SolvedData[index];
+                var unsolvedData = data.UnsolvedData[index];
+                
+                _gridSquares[index].GetComponent<GridSquare>().SetNumber(unsolvedData);
+                _gridSquares[index].GetComponent<GridSquare>().SetCorrectNumber(solvedData);
+                _gridSquares[index].GetComponent<GridSquare>().SetHasDefaultValue(unsolvedData != 0 && unsolvedData == solvedData);
             }
         }
 
         private void OnEnable()
         {
             GameEvents.OnSquareSelected += OnSquareSelected;
+            GameEvents.OnCorrectNumber += OnSquareCorrect;
         }
 
         private void OnDisable()
         {
             GameEvents.OnSquareSelected -= OnSquareSelected;
+            GameEvents.OnCorrectNumber -= OnSquareCorrect;
+
         }
 
-        private void SetSquaresColor(int[] data, Color col)
+        private void SetSquaresColor(int[] data, Color color)
         {
             foreach (var index in data)
             {
-                var comp = grid_squares_[index].GetComponent<GridSquare>();
-                if (comp.HasWrongValue() == false && comp.IsSelected() == false)
+
+                var square = _gridSquares[index];
+                var gridSquare = square.GetComponent<GridSquare>();
+                if (!gridSquare.IsSelected() && !gridSquare.HasWrongValue())
                 {
-                    comp.SetSquareColour(col);
+                    gridSquare.SetSquareColour(color);
                 }
             }
         }
 
-        public void OnSquareSelected(int square_index)
+        private void OnSquareCorrect(int squareIndex)
         {
-            var horizontal_line = LineIndicator.instance.GetHorizontalLine(square_index);
-            var vertical_line = LineIndicator.instance.GetVerticalLine(square_index);
-            var square = LineIndicator.instance.GetSquare(square_index);
+            var data = SudokuData.Instance.SudokuGamesDict[_gameMode][_currentStage];
+            
+            /* Copy the unsolved data list to another
+             * which will be used for storing the current
+             * game state
+             */
+            var oldGridData = _saveManager.Data.CurrentGridData;
+            
+            var gridData = new List<int>();
+            
+            if (oldGridData.Count == 0)
+            {
+                gridData.AddRange(data.UnsolvedData);
+            }
+            else
+            {
+                gridData.AddRange(oldGridData);
+            }
+
+            var solvedData = data.SolvedData;
+            var solvedNumber = solvedData[squareIndex];
+            
+            // Prevent IndexOutOfBounds error
+            if (squareIndex >= gridData.Count)
+            {
+                return;
+            }
+
+
+            gridData[squareIndex] = solvedNumber;
+            _saveManager.Data.CurrentGridData = gridData;
+            _saveManager.Save(true);
+            
+            Debug.Log($"Unsolved Number: {data.UnsolvedData[squareIndex]}, SolvedNumber: {solvedNumber}, SquareIndex: {gridData[squareIndex]}");
+            
+        }
+
+  
+
+        public void OnSquareSelected(int index)
+        {
+            var horizontalLine = LineIndicator.instance.GetHorizontalLine(index);
+            var verticalLine = LineIndicator.instance.GetVerticalLine(index);
+            var square = LineIndicator.instance.GetSquare(index);
 
             SetSquaresColor(LineIndicator.instance.GetAllSquareIndex(), Color.white);
-
-            SetSquaresColor(horizontal_line, line_highlight_color);
-            SetSquaresColor(vertical_line, line_highlight_color);
-            SetSquaresColor(square, line_highlight_color);
+            SetSquaresColor(horizontalLine, lineHighlightColor);
+            SetSquaresColor(verticalLine, lineHighlightColor);
+            SetSquaresColor(square, lineHighlightColor);
         }
     }
 }

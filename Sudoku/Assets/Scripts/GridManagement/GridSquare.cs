@@ -52,6 +52,8 @@ namespace GridManagement
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            // Don't allow default numbers to be pressed
+            if (has_default_value_) return;
             selected_ = true;
             GameEvents.SquareSelecedMethod(square_index_);
             
@@ -87,7 +89,7 @@ namespace GridManagement
                     var colors = this.colors;
                     colors.normalColor = Color.red;
                     this.colors = colors;
-                    ScoreManager.Instance.reduceScore();
+                    ScoreManager.Instance.ReduceScore();
                 }
                 else
                 {
@@ -97,7 +99,7 @@ namespace GridManagement
                     colors.normalColor = Color.white;
                     this.colors = colors;
                     ScoreManager.Instance.AddScore();
-                    GameEvents.OnCorrectMethod();
+                    GameEvents.OnCorrectMethod(square_index_);
                 }
             }
         }
@@ -112,14 +114,16 @@ namespace GridManagement
                 var colors = this.colors;
                 colors.normalColor = Color.white;
                 this.colors = colors;
-                GameEvents.OnCorrectMethod();
+                
+                GameEvents.OnCorrectMethod(square_index_);
                 GameEvents.OnReduceHintMethod();
             }
         }
 
         public void OnSquareSelected(int square_index)
         {
-            if(square_index_ != square_index)
+
+            if(square_index_ != square_index )
             {
                 selected_ = false;
             }

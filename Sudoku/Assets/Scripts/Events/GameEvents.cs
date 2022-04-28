@@ -46,14 +46,14 @@ namespace Events
             }
         }
     
-        public delegate void CorrectNumber();
+        public delegate void CorrectNumber(int squareIndex);
         public static event CorrectNumber OnCorrectNumber;
 
-        public static void OnCorrectMethod()
+        public static void OnCorrectMethod(int squareIndex)
         {
             if (OnCorrectNumber != null)
             {
-                OnCorrectNumber();
+                OnCorrectNumber(squareIndex);
             }
         }
 

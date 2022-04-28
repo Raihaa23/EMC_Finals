@@ -12,47 +12,75 @@ namespace Managers
     {
         [SerializeField] private TextMeshProUGUI hintCountTxt;
         [SerializeField] private TextMeshProUGUI maxHintTxt;
-        private int currentHintCount;
-        private int maxHintCount;
+        
+        private int _currentHintCount;
+        private int _maxHintCount;
+        private SaveManager _saveManager;
 
-        private int easyHintCount = 3;
-        private int mediumHintCount = 5;
-        private int hardHintCount = 8;
+        private const int EasyHintCount = 3;
+        private const int MediumHintCount = 5;
+        private const int HardHintCount = 8;
+        
         private void Start()
         {
-            switch (GameSettings.Instance.GetGameMode())
+            _saveManager = SaveManager.Instance;
+
+
+            var gameMode = GameSettings.Instance.GetGameMode();
+
+            var hintCount = 0;
+            
+            switch (gameMode)
             {
-                case "Easy":
-                    currentHintCount = easyHintCount;
+                case GameModeDifficulty.Easy:
+                    hintCount = EasyHintCount;
                     break;
-                case "Medium":
-                    currentHintCount = mediumHintCount;
+                case GameModeDifficulty.Unknown:
+                    hintCount = 0;
                     break;
-                case "Hard":
-                    currentHintCount = hardHintCount;
+                case GameModeDifficulty.Medium:
+                    hintCount = MediumHintCount;
+                    break;
+                case GameModeDifficulty.Hard:
+                    hintCount = HardHintCount;
+                    break;
+                default:
+                    hintCount = 0;
                     break;
             }
 
-            maxHintCount = currentHintCount;
+            _currentHintCount = hintCount;
+            
+            if (_saveManager.Data.RemainingHints > 0)
+            {
+                _currentHintCount = _saveManager.Data.RemainingHints;
+            }
+            
+            _maxHintCount = hintCount;
         }
 
         private void Update()
         {
-            hintCountTxt.text = currentHintCount.ToString();
-            maxHintTxt.text = maxHintCount.ToString();
+            hintCountTxt.text = _currentHintCount.ToString();
+            maxHintTxt.text = _maxHintCount.ToString();
         }
 
         public void UseHint()
         {
-            if (currentHintCount > 0)
+            if (_currentHintCount > 0)
             {
                 GameEvents.OnGetHintMethod();
             }
+
+            SaveManager.Instance.Data.UpdateRemainingHints(_currentHintCount);
+            SaveManager.Instance.Save();
         }
 
         private void ReduceHints()
         {
-            currentHintCount -= 1;
+            _currentHintCount -= 1;
+            SaveManager.Instance.Data.UpdateRemainingHints(_currentHintCount);
+            SaveManager.Instance.Save();
         }
 
         private void OnEnable()

@@ -2,16 +2,11 @@ using UnityEngine;
 
 namespace GridManagement
 {
+    
+    
     public class GameSettings : MonoBehaviour
     {
-        public enum EGameMode
-        {
-            NOT_SET,
-            EASY,
-            MEDIUM,
-            HARD,
-        }
-
+     
         #region singleton
         public static GameSettings Instance;
 
@@ -29,7 +24,7 @@ namespace GridManagement
 
         #endregion
 
-        private EGameMode _GameMode;
+        private GameModeDifficulty _gameModeDifficulty;
         private bool _Paused = false;
 
         public void SetPaused(bool paused) { _Paused = paused;}
@@ -37,25 +32,18 @@ namespace GridManagement
 
         void Start()
         {
-            _GameMode = EGameMode.NOT_SET;    
+            _gameModeDifficulty = GameModeDifficulty.Unknown;
         }
 
-        public void SetGameMode(EGameMode mode)
+        public void SetGameMode(GameModeDifficulty mode)
         {
-            _GameMode = mode; 
+            _gameModeDifficulty = mode; 
         }
 
-        public string GetGameMode()
+        public GameModeDifficulty GetGameMode()
         {
-            switch (_GameMode)
-            {
-                case EGameMode.EASY: return "Easy";
-                case EGameMode.MEDIUM: return "Medium";
-                case EGameMode.HARD: return "Hard";
-            }
 
-            Debug.LogError("ERROR: Game Level is not set!!");
-            return " ";
+            return _gameModeDifficulty;
         }
     }
 }

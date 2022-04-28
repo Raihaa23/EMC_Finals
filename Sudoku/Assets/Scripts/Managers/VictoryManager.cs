@@ -8,6 +8,7 @@ namespace Managers
     {
         [SerializeField] private GameObject victoryPopUp;
 
+        private SaveManager _saveManager;
         private int correctCount = 0;
 
         private int currentChecker;
@@ -19,24 +20,32 @@ namespace Managers
 
         private void Start()
         {
+            _saveManager = SaveManager.Instance;
+
+            if (_saveManager.HasSave())
+            {
+                correctCount = _saveManager.Data.CorrectCount;
+            }
+            
             switch (GameSettings.Instance.GetGameMode())
             {
-                case "Easy":
+                case GameModeDifficulty.Easy:
                     currentChecker = easyChecker;
                     break;
-                case "Medium":
+                case GameModeDifficulty.Medium:
                     currentChecker = mediumChecker;
                     break;
-                case "Hard":
+                case GameModeDifficulty.Hard:
                     currentChecker = hardChecker;
                     break;
             }
         }
 
-        private void CorrectNumber()
+        private void CorrectNumber(int squareIndex)
         {
             correctCount += 1;
-        
+            _saveManager.Data.CorrectCount = correctCount;
+            _saveManager.Save(showLogs:true);
             CheckForVictory();
         }
         private void CheckForVictory()
