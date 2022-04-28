@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class ScoreManager : MonoBehaviour
+    public class ScoreManager : MonoBehaviour , IGameData
     {
         #region Singleton
 
@@ -36,6 +36,16 @@ namespace Managers
 
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private TextMeshProUGUI finalScoreText;
+
+        public void LoadData(GameData data)
+        {
+            this._ongoingScore = data.IngameScore;
+        }
+
+        public void SaveData(ref GameData data)
+        {
+            data.IngameScore = this._ongoingScore;
+        }
 
         private void Update()
         {
