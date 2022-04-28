@@ -15,6 +15,7 @@ namespace Managers
         private int easyChecker = 30;
         private int mediumChecker = 45;
         private int hardChecker = 65;
+        
 
         private void Start()
         {
@@ -30,11 +31,6 @@ namespace Managers
                     currentChecker = hardChecker;
                     break;
             }
-        }
-
-        private void Update()
-        {
-            Debug.Log("Correct Answers = " + correctCount + " / " + currentChecker);
         }
 
         private void CorrectNumber()

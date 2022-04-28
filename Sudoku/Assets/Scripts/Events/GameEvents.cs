@@ -21,6 +21,30 @@ namespace Events
             if (OnSquareSelected != null)
                 OnSquareSelected(square_index);
         }
+
+        public delegate void GetHint();
+
+        public static event GetHint OnGetHint;
+
+        public static void OnGetHintMethod()
+        {
+            if (OnGetHint != null)
+            {
+                OnGetHint();
+            }
+        }
+        
+        public delegate void ReduceHintCount();
+
+        public static event ReduceHintCount OnReduceHint;
+
+        public static void OnReduceHintMethod()
+        {
+            if (OnReduceHint != null)
+            {
+                OnReduceHint();
+            }
+        }
     
         public delegate void CorrectNumber();
         public static event CorrectNumber OnCorrectNumber;
